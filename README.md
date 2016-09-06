@@ -1,5 +1,5 @@
 # DRSanalysis
-Matlab script for extracting the optical properties from differential reflectance spectra (DRS) by kramers-kronig constrained variational analysis. This program has a graphical user interface and is able to iteratively account for significant absorptions at energies above the measured energy range by a suitably parameterized extrapolation. It is written for thin organic films.
+Matlab script for extracting the dielectric function from differential reflectance spectra (DRS) by kramers-kronig constrained variational analysis. This program has a graphical user interface and is able to iteratively account for significant absorptions at energies above the measured energy range by a suitably parameterized extrapolation. It is written for the investigation of the optical properties of thin organic films. Due to the general parameterization of the dielectric function the script does not require initial parameters or adjustements of the parameterization.
 
 # Usage:
 required data files (examples can be found in the folder 'example'):
