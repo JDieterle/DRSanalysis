@@ -77,7 +77,7 @@ end
 ex_film=E_e1_e2(:,2)-1i*E_e1_e2(:,3);
 ex_all=[ex_film,model_parm.ex_sub]; 
 
-DRS=model_drs_data_all(E, ex_all,d_, model_parm.R_ss_0);
+DRS=model_drs_data_all(E, ex_all,d_, model_parm.R_ss_0, model_parm.aoi);
 
 
 % data=[E_e1_e2];

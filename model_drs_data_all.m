@@ -1,7 +1,7 @@
 % transfer matrix algorithm for uniaxial anisotropic stratified samples
 % simplified version of equations reported in:
 % J. Hao and L. Zhou, PRB 77, 094201 (2008)
-function data=model_drs_data_all(Energy_,ex_,d_, R_ss_0)
+function data=model_drs_data_all(Energy_,ex_,d_, R_ss_0, aoi_in)
 % aniso: vector with 1 for anisotropic and 1 for isotropic layers
 if nargin==0
 %Energy_(:,1)=1.4:0.01:6;
@@ -54,6 +54,16 @@ d=zeros(numel(Energy_)*numel(angle_of_incidence_),num_layers);
 ex=complex(zeros(numel(Energy_)*numel(angle_of_incidence_),num_layers));
 
 aoi=1;
+if nargin==5
+sin_aoi_=sin(aoi_in*pi/180);
+cos_aoi_=cos(aoi_in*pi/180);
+sin_aoi((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_))=sin_aoi_(aoi);
+cos_aoi((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_))=cos_aoi_(aoi);
+else
+    sin_aoi((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_))=0;
+    cos_aoi((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_))=1;
+end
+
 Energy((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_))=Energy_;
 ex((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_),:)=ex_;
 d((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_),:)=d_;
@@ -67,8 +77,8 @@ d((aoi-1)*numel(Energy_)+1:aoi*numel(Energy_),:)=d_;
 %lE=numel(Energy);
 omega_sq=(Energy./hbar).^2;
 k_length=Energy/hbar/c;
-kx=k_length.*0;
-kz0_1(:,1)=k_length.*1;% kz in air, later replaced by kz(:,n_layer)
+kx=k_length.*sin_aoi';
+kz0_1(:,1)=k_length.*cos_aoi';% kz in air, later replaced by kz(:,n_layer)
 %kz0_2=-kz0_1;
 %kz0_4=-kz0_1;
 

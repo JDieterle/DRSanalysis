@@ -36,7 +36,8 @@ model_parm=struct(  'thickness',0,...
                     'dOxide',0,...
                     'dstart', 25,...
                     'dstop',1,...
-                    'ema', ema);
+                    'ema', ema,...
+                    'aoi', 0); % aoi in degree
                 
                 
 initial_parms=struct('thickness', [],... % [] if no number, 0 for different initial parameters for each spectrum
@@ -108,6 +109,7 @@ if nargin==1
     fit_parm.cutspectrum_off_lower=str2num(settings.energy.min);
     fit_parm.cutspectrum_off_upper=str2num(settings.energy.max);
     fit_parm.dEnergy=str2num(settings.energy.d);
+    model_parm.aoi=str2num(settings.aoi);
 
     model_parm.dstart=str2num(settings.thickness_range.min);
     model_parm.dstop=str2num(settings.thickness_range.max);
@@ -752,16 +754,8 @@ end
 ex_film=E_e1_e2(:,2)-1i*E_e1_e2(:,3);
 ex_all=[ex_film,model_parm.ex_sub]; 
 
-DRS=model_drs_data_all(E, ex_all,d_, model_parm.R_ss_0);
+DRS=model_drs_data_all(E, ex_all,d_, model_parm.R_ss_0, model_parm.aoi);
 
-
-% data=[E_e1_e2];
-% write_E_e1_e2_in_VASE_readable_file(data, 'R:\film.mat');
-% data=[E_e1_e2(:,1),real(model_parm.ex_sub(:,1)), -imag(model_parm.ex_sub(:,1))];
-% write_E_e1_e2_in_VASE_readable_file(data, 'R:\glas.mat');
-% data=[E_e1_e2(:,1), DRS2, DRS];
-% save('R:\drs.dat', 'data', '-ascii');
-% diff_xx=sum(abs(DRS2-DRS))
 
 % change weight of data points:
 diff_DRSexp_mod=DRS-fit_parm.drs;

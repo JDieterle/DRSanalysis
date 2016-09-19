@@ -26,7 +26,7 @@ function varargout = kk_analysis_DRS_GUI(varargin)
 
 % Edit the above text to modify the response to help kk_analysis_DRS_GUI
 
-% Last Modified by GUIDE v2.5 27-Jun-2016 09:59:24
+% Last Modified by GUIDE v2.5 07-Sep-2016 22:03:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -185,6 +185,7 @@ handles.edit_transparent_range_max.Enable='off';
 handles.edit_max_small_absorption.Enable='off';
 handles.edit_energy_min.Enable='off';
 handles.edit_energy_max.Enable='off';
+handles.edit_aoi.Enable='off';
 handles.edit_d_energy.Enable='off';
 handles.edit_thickness_range_min.Enable='off';
 handles.edit_thickness_range_max.Enable='off';
@@ -219,6 +220,7 @@ settings.transparent_range.max_small_abs=get(handles.edit_max_small_absorption,'
 settings.energy.min=get(handles.edit_energy_min,'String');
 settings.energy.max=get(handles.edit_energy_max,'String');
 settings.energy.d=get(handles.edit_d_energy,'String');
+settings.aoi=get(handles.edit_aoi,'String');
 
 settings.thickness_range.min=get(handles.edit_thickness_range_min,'String');
 settings.thickness_range.max=get(handles.edit_thickness_range_max,'String');
@@ -284,6 +286,7 @@ handles.edit_max_small_absorption.Enable='on';
 handles.edit_energy_min.Enable='on';
 handles.edit_energy_max.Enable='on';
 handles.edit_d_energy.Enable='on';
+handles.edit_aoi.Enable='on';
 handles.edit_thickness_range_min.Enable='on';
 handles.edit_thickness_range_max.Enable='on';
 handles.popupmenu_substrate.Enable='on';
@@ -655,6 +658,7 @@ set(handles.edit_transparent_range_max, 'String', settings.transparent_range.max
 set(handles.edit_max_small_absorption, 'String', settings.transparent_range.max_small_abs);
 set(handles.edit_energy_min, 'String', settings.energy.min);
 set(handles.edit_energy_max, 'String', settings.energy.max);
+set(handles.edit_aoi, 'String', settings.aoi);
 set(handles.edit_d_energy, 'String',   settings.energy.d);
 set(handles.edit_thickness_range_min, 'String', settings.thickness_range.min);
 set(handles.edit_thickness_range_max, 'String', settings.thickness_range.max);
@@ -906,3 +910,49 @@ function pathname_fit_Callback(hObject, eventdata, handles)
 %        str2double(get(hObject,'String')) returns contents of pathname_fit as a double
 pathname_fit=evalin('base','pathname_fit_old');
 set(handles.pathname_fit,'String', [pathname_fit]);
+
+
+
+function edit18_Callback(hObject, eventdata, handles)
+% hObject    handle to edit18 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit18 as text
+%        str2double(get(hObject,'String')) returns contents of edit18 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit18_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit18 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit_aoi_Callback(hObject, eventdata, handles)
+% hObject    handle to edit_aoi (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit_aoi as text
+%        str2double(get(hObject,'String')) returns contents of edit_aoi as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit_aoi_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit_aoi (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
